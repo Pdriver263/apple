@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: marnsteak-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: marnsteak-api
+  template:
+    metadata:
+      labels:
+        app: marnsteak-api
+    spec:
+      containers:
+      - name: api
+        image: your-registry/marnsteak-api:latest
+        ports:
+        - containerPort: 5000
+        envFrom:
+        - configMapRef:
+            name: marnsteak-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: marnsteak-service
+spec:
+  selector:
+    app: marnsteak-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: LoadBalancer
