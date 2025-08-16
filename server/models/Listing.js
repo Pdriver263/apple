@@ -23,6 +23,7 @@ const listingSchema = new mongoose.Schema({
     maxGuests: { type: Number, required: true },
     bedrooms: { type: Number, required: true },
     beds: { type: Number, required: true },
+    isFeatured: { type: Boolean, default: false }, // ফিচার্ড ফিল্ড যোগ করা হয়েছে
     createdAt: { type: Date, default: Date.now }
 });
 

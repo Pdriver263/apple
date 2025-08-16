@@ -19,6 +19,8 @@ app.use(express.json());
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("MongoDB Connected!"))
     .catch(err => console.log(err));
+// CORRECTED ROUTE REGISTRATION
+app.use('/api', require('./routes/listingRoutes')); // Changed to /api
 
 // Routes
 app.use('/api/users', require('./routes/userRoutes'));
